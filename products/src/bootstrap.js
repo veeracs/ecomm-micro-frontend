@@ -1,10 +1,20 @@
 import faker from 'faker';
 
-let products = '';
+export const mount = (elm) => {
+    let products = '';
 
-for (let i = 0; i < 5; i++) {
-    const name = faker.commerce.productName();
-    products += `<div>${name}</div>`;
+    for (let i = 0; i < 5; i++) {
+        const name = faker.commerce.productName();
+        products += `<div>${name}</div>`;
+    }
+
+    if (elm) {
+        elm.innerHTML = products;
+    }
 }
 
-document.querySelector('#dev-products').innerHTML = products;
+if (process.env.NODE_ENV === 'development') {
+    const elm = document.querySelector('#dev-products');
+
+    mount(elm);
+}
